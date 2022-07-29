@@ -20,6 +20,10 @@ miLabel = Label(miFrame, text='Costo/Beneficio por crepa')
 miLabel.grid(row=0,column=1)
 
 #Entry
+
+#Lista ingredientes
+L = ['Jamón', 'Queso Crema', 'Queso Mozarella' ]
+
 #Ingrediente 1
 cuadro1=Entry(miFrame)
 cuadro1.grid(row=1,column=1)
@@ -67,7 +71,6 @@ pantalla.grid(row=4,column=1, padx=10,pady=10,columnspan=3)
 pantalla.config(justify="center")
 label_pantalla = Label(miFrame,text='Costo total ',padx = 10,pady=15)
 label_pantalla.grid(row=4,column=1)
-
 
 #Boton
 def codigoBoton():
