@@ -78,7 +78,7 @@ def codigoBoton():
     gramo2 = cuadro2_1.get()
     tercer_ingrediente=cuadro3.get().strip().lower()
     gramo3 = cuadro3_1.get()
-    costo = dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)
+    costo = 2.76 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)
     costo = str(round(costo,2))
     CostoPantalla.set(costo)
 
