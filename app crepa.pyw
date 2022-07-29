@@ -13,8 +13,11 @@ miFrame.pack()
 miFrame.config(bg = '#FBF7CE' )
 miFrame.config(width = '550', height='550')
 
-miLabel = Label(miFrame, text='Costo/Beneficio por crepa')
+#Lable
+miLabel = Label(miFrame, text='Costo/Beneficio por crepa',font=(5))
 miLabel.pack()
+miLabel.config(bg='#FBF7CE')
+
 
 if __name__ == '__main__':
     raiz.mainloop()
