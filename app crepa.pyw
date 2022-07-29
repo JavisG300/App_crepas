@@ -10,14 +10,34 @@ raiz.config(bg='#CFECFF')
 #Frame
 miFrame = Frame() #Debemos meterlo dentro de la raíz
 miFrame.pack()
-miFrame.config(bg = '#FBF7CE' )
-miFrame.config(width = '550', height='550')
+#miFrame.config(width = '550', height='550')
 
-#Lable
-miLabel = Label(miFrame, text='Costo/Beneficio por crepa',font=(5))
-miLabel.pack()
-miLabel.config(bg='#FBF7CE')
 
+#Label
+miLabel = Label(miFrame, text='Costo/Beneficio por crepa')
+miLabel.grid(row=0,column=1)
+
+#Entry
+#Ingrediente 1
+cuadro1=Entry(miFrame)
+cuadro1.grid(row=1,column=1)
+cuadro1.config(justify='center')
+labelcuadro1=Label(miFrame,text='Ingrediente 1: ',padx = 10,pady=15)
+labelcuadro1.grid(row=1,column=0)
+
+#Ingrediente 2
+cuadro2=Entry(miFrame)
+cuadro2.grid(row=2,column=1)
+cuadro2.config(justify='center')
+labelcuadro2=Label(miFrame,text='Ingrediente 2: ',padx = 10,pady=15)
+labelcuadro2.grid(row=2,column=0)
+
+#Ingrediente 2
+cuadro3=Entry(miFrame)
+cuadro3.grid(row=3,column=1)
+cuadro3.config(justify='center')
+labelcuadro3=Label(miFrame,text='Ingrediente 3: ',padx = 10,pady=15)
+labelcuadro3.grid(row=3,column=0)
 
 if __name__ == '__main__':
     raiz.mainloop()
