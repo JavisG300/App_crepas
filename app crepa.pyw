@@ -20,7 +20,7 @@ miLabel = Label(miFrame, text='Costo/Beneficio por crepa')
 miLabel.grid(row=0,column=1)
 milabel2 = Label(miFrame,text ='jamon, quesocrema, mozarella, kitkat, nutella, mermelada, lechera, chocoretas, duraznos, oreo , salsatomate, gouda')
 milabel2.grid(row=7,column=1)
-milabel3 = Label(miFrame,text = 'peperoni, chantilly, nuez, manzana, nuez, canela, cajeta, platano, fresa, arandano')
+milabel3 = Label(miFrame,text = 'peperoni, chantilly, nuez, manzana, nuez, canela, cajeta, platano, fresa, arandano, NA')
 milabel3.grid(row=8,column=1)
 #Entry
 
@@ -101,14 +101,18 @@ label_pantalla.grid(row=6,column=1)
 
 #Boton
 def codigoBoton():
-    dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14,'kitkat':0.24,'nutella':0.17,'mermelada':0.12,'lechera':0.06,'chocoretas':0.2,'duraznos':0.06,'oreo':0.1,'salsatomate':0.09,'gouda':0.21,'peperoni':0.58,'chantilly':0.06,'nuez':0.5,'manzana':0.04,'nuez':0.5,'canela':0.17,'cajeta':0.15,'platano':0.033,'fresa':0.13,'arandano':0.3}
+    dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14,'kitkat':0.24,'nutella':0.17,'mermelada':0.12,'lechera':0.06,'chocoretas':0.2,'duraznos':0.06,'oreo':0.1,'salsatomate':0.09,'gouda':0.21,'peperoni':0.58,'chantilly':0.06,'nuez':0.5,'manzana':0.04,'nuez':0.5,'canela':0.17,'cajeta':0.15,'platano':0.033,'fresa':0.13,'arandano':0,'na':0}
     primer_ingrediente=cuadro1.get().strip().lower()
     gramo1 = cuadro1_1.get()
     segundo_ingrediente=cuadro2.get().strip().lower()
     gramo2 = cuadro2_1.get()
     tercer_ingrediente=cuadro3.get().strip().lower()
     gramo3 = cuadro3_1.get()
-    costo = 2.76 + 5 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)
+    cuarto_ingrediente = cuadro4.get().strip().lower()
+    gramo4 = cuadro4_1.get()
+    quinto_ingrediente = cuadro5.get().strip().lower()
+    gramo5 = cuadro5_1.get()
+    costo = 2.76 + 5 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)+  dic[cuarto_ingrediente]*float(gramo4)+  dic[quinto_ingrediente]*float(gramo5)
     costo = str(round(costo,2))
     CostoPantalla.set(costo)
 
