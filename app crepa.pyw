@@ -6,7 +6,7 @@ raiz = Tk()
 raiz.title('La vuelta al mundo en 80 crepas')
 raiz.resizable(0,0) #Para no dimensionar a mano
 raiz.iconbitmap('happy_icon-icons.com_67810.ico')
-raiz.geometry('580x300')
+raiz.geometry('880x300')
 raiz.config(bg='#CFECFF')
 
 #Frame
@@ -18,11 +18,12 @@ miFrame.pack()
 #Label
 miLabel = Label(miFrame, text='Costo/Beneficio por crepa')
 miLabel.grid(row=0,column=1)
-
+milabel2 = Label(miFrame,text ='jamon, quesocrema, quesomozarella, kitkat, nutella, mermelada, lechera, chocoretas, duraznos, oreo , salsatomate' )
+milabel2.grid(row=5,column=1)
 #Entry
 
 #Lista ingredientes
-L = ['Jamón', 'Queso Crema', 'Queso Mozarella' ]
+L = ['jamon','quesocrema', 'quesomozarella','kitkat','nutella','mermelada','lechera','chocoretas','duraznos','oreo','salsatomate']
 
 #Ingrediente 1
 cuadro1=Entry(miFrame)
@@ -74,7 +75,7 @@ label_pantalla.grid(row=4,column=1)
 
 #Boton
 def codigoBoton():
-    dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14}
+    dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14,'kitkat':0.24,'nutella':0.17,'mermelada':0.12,'lechera':0.06,'chocoretas':0.2,'duraznos':0.06,'oreo':0.1,'salsatomate':0.09}
     primer_ingrediente=cuadro1.get().strip().lower()
     gramo1 = cuadro1_1.get()
     segundo_ingrediente=cuadro2.get().strip().lower()
