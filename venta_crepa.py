@@ -1,3 +1,4 @@
+from msilib.schema import File
 from tkinter import  Tk, Button, Entry, Label, ttk, PhotoImage
 from tkinter import  StringVar,Scrollbar,Frame
 from conexion import*
@@ -18,15 +19,15 @@ class Ventana(Frame):
 		self.id = StringVar()
 		self.base_datos = Registro_datos()
 
-		self.frame_inicio = Frame(self.master, bg='black', width=50, height=45)
+		self.frame_inicio = Frame(self.master, bg='#FEF5E7', width=50, height=45)
 		self.frame_inicio.grid_propagate(0)
 		self.frame_inicio.grid(column=0, row = 0, sticky='nsew')
-		self.frame_menu = Frame(self.master, bg='black', width = 50)
+		self.frame_menu = Frame(self.master, bg='#FEF5E7', width = 50)
 		self.frame_menu.grid_propagate(0)
 		self.frame_menu.grid(column=0, row = 1, sticky='nsew')
-		self.frame_top = Frame(self.master, bg='black', height = 50)
+		self.frame_top = Frame(self.master, bg='#FEF5E7', height = 50)
 		self.frame_top.grid(column = 1, row = 0, sticky='nsew')
-		self.frame_principal = Frame(self.master, bg='black')
+		self.frame_principal = Frame(self.master, bg='#FEF5E7')
 		self.frame_principal.grid(column=1, row=1, sticky='nsew')
 		self.master.columnconfigure(1, weight=1)
 		self.master.rowconfigure(1, weight=1)
@@ -98,10 +99,10 @@ class Ventana(Frame):
 		if self.color == True:
 			self.bt_color['image'] = self.dia
 			self.titulo.config(fg='deep sky blue')
-			self.frame_seis.config(bg= 'black')
-			self.text_ajustes.config(bg='black')
-			self.texto.config(bg='black')
-			self.bt_color.config(bg='black',activebackground='black')	
+			self.frame_seis.config(bg= '#FEF5E7')
+			self.text_ajustes.config(bg='#FEF5E7')
+			self.texto.config(bg='#FEF5E7')
+			self.bt_color.config(bg='#FEF5E7',activebackground='#FEF5E7')	
 			self.color = False	
 		else:
 			self.bt_color['image'] = self.noche
@@ -120,41 +121,41 @@ class Ventana(Frame):
 		self.imagen_buscar = PhotoImage(file ='buscar.png')
 		self.imagen_ajustes = PhotoImage(file ='configuracion.png')
 
-		self.logo = PhotoImage(file ='logo.png')
+		self.logo = PhotoImage(file = 'logo.png')
 		self.imagen_uno = PhotoImage(file ='imagen_uno.png')
 		self.imagen_dos= PhotoImage(file ='imagen_dos.png')
 		self.dia = PhotoImage(file ='dia.png')
 		self.noche= PhotoImage(file ='noche.png')
-		self.bt_inicio = Button(self.frame_inicio, image= self.imagen_inicio, bg='black',activebackground='black', bd=0, command = self.menu_lateral)
+		self.bt_inicio = Button(self.frame_inicio, image= self.imagen_inicio, bg='#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.menu_lateral)
 		self.bt_inicio.grid(column=0, row=0, padx=5, pady=10)
-		self.bt_cerrar = Button(self.frame_inicio, image= self.imagen_menu, bg='black',activebackground='black', bd=0, command = self.menu_lateral)
+		self.bt_cerrar = Button(self.frame_inicio, image= self.imagen_menu, bg='#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.menu_lateral)
 		self.bt_cerrar.grid(column=0, row=0, padx=5, pady=10)	
 		#BOTONES Y ETIQUETAS DEL MENU LATERAL 
-		Button(self.frame_menu, image= self.imagen_datos, bg='black', activebackground='black', bd=0, command = self.pantalla_datos).grid(column=0, row=1, pady=20,padx=10)
-		Button(self.frame_menu, image= self.imagen_registrar, bg='black',activebackground='black', bd=0, command =self.pantalla_escribir ).grid(column=0, row=2, pady=20,padx=10)
-		Button(self.frame_menu, image= self.imagen_actualizar, bg= 'black',activebackground='black', bd=0, command = self.pantalla_actualizar).grid(column=0, row=3, pady=20,padx=10)
-		Button(self.frame_menu, image= self.imagen_buscar, bg= 'black',activebackground='black', bd=0, command = self.pantalla_buscar).grid(column=0, row=4, pady=20,padx=10)		
-		Button(self.frame_menu, image= self.imagen_ajustes, bg= 'black',activebackground='black', bd=0, command = self.pantalla_ajustes).grid(column=0, row=5, pady=20,padx=10)
+		Button(self.frame_menu, image= self.imagen_datos, bg='#FEF5E7', activebackground='#FEF5E7', bd=0, command = self.pantalla_datos).grid(column=0, row=1, pady=20,padx=10)
+		Button(self.frame_menu, image= self.imagen_registrar, bg='#FEF5E7',activebackground='#FEF5E7', bd=0, command =self.pantalla_escribir ).grid(column=0, row=2, pady=20,padx=10)
+		Button(self.frame_menu, image= self.imagen_actualizar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_actualizar).grid(column=0, row=3, pady=20,padx=10)
+		Button(self.frame_menu, image= self.imagen_buscar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_buscar).grid(column=0, row=4, pady=20,padx=10)		
+		Button(self.frame_menu, image= self.imagen_ajustes, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_ajustes).grid(column=0, row=5, pady=20,padx=10)
 		
-		Label(self.frame_menu, text= 'Base Datos', bg= 'black', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=1, pady=20, padx=2)
-		Label(self.frame_menu, text= 'Registrar', bg= 'black', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=2, pady=20, padx=2)
-		Label(self.frame_menu, text= ' Actualizar', bg= 'black', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=3, pady=20, padx=2)
-		Label(self.frame_menu, text= 'Eliminar', bg= 'black', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=4, pady=20, padx=2)	
-		Label(self.frame_menu, text= 'Ajustes', bg= 'black', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=5, pady=20, padx=2)
+		Label(self.frame_menu, text= 'Base Datos', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=1, pady=20, padx=2)
+		Label(self.frame_menu, text= 'Registrar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=2, pady=20, padx=2)
+		Label(self.frame_menu, text= ' Actualizar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=3, pady=20, padx=2)
+		Label(self.frame_menu, text= 'Eliminar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=4, pady=20, padx=2)	
+		Label(self.frame_menu, text= 'Ajustes', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=5, pady=20, padx=2)
 
         	#############################  CREAR  PAGINAS  ##############################
 		estilo_paginas = ttk.Style()
-		estilo_paginas.configure("TNotebook", background='black', foreground='black', padding=0, borderwidth=0)
+		estilo_paginas.configure("TNotebook", background='#FEF5E7', foreground='black', padding=0, borderwidth=0)
 		estilo_paginas.theme_use('default')
-		estilo_paginas.configure("TNotebook", background='black', borderwidth=0)
-		estilo_paginas.configure("TNotebook.Tab", background="black", borderwidth=0)
-		estilo_paginas.map("TNotebook", background=[("selected", 'black')])
-		estilo_paginas.map("TNotebook.Tab", background=[("selected", 'black')], foreground=[("selected", 'black')]);
+		estilo_paginas.configure("TNotebook", background='#FEF5E7', borderwidth=0)
+		estilo_paginas.configure("TNotebook.Tab", background="#FEF5E7", borderwidth=0)
+		estilo_paginas.map("TNotebook", background=[("selected", '#FEF5E7')])
+		estilo_paginas.map("TNotebook.Tab", background=[("selected", '#FEF5E7')], foreground=[("selected", 'black')]);
 
 		#CREACCION DE LAS PAGINAS 
 		self.paginas = ttk.Notebook(self.frame_principal , style= 'TNotebook') #, style = 'TNotebook'
 		self.paginas.grid(column=0,row=0, sticky='nsew')
-		self.frame_uno = Frame(self.paginas, bg='DarkOrchid1')
+		self.frame_uno = Frame(self.paginas, bg='#FEF5E7')
 		self.frame_dos = Frame(self.paginas, bg='white')
 		self.frame_tres = Frame(self.paginas, bg='white')
 		self.frame_cuatro = Frame(self.paginas, bg='white')
@@ -169,18 +170,18 @@ class Ventana(Frame):
 		##############################         PAGINAS       #############################################
 
 		######################## FRAME TITULO #################
-		self.titulo = Label(self.frame_top,text= 'APLICACION DE ESCRITORIO EN PYTHON CON TKINTER', bg='black', fg= 'DarkOrchid1', font= ('Imprint MT Shadow', 15, 'bold'))
+		self.titulo = Label(self.frame_top,text= 'La vuelta al mundo en 80 crepas', bg='#FEF5E7', fg= '#A569BD', font= ('Imprint MT Shadow', 15, 'bold'))
 		self.titulo.pack(expand=1)
 		######################## VENTANA PRINCIPAL #################
-		Label(self.frame_uno, text= 'Electrónica Programación y Tecnología', bg='DarkOrchid1', fg= 'white', font= ('Freehand521 BT', 20, 'bold')).pack(expand=1)
-		Label(self.frame_uno ,image= self.logo, bg='DarkOrchid1').pack(expand=1)
+		Label(self.frame_uno, text= 'App para llevar el registro de crepas vendidas', bg='#FEF5E7', fg= '#A569BD', font= ('Freehand521 BT', 20, 'bold')).pack(expand=1)
+		Label(self.frame_uno ,image= self.logo, bg='#FEF5E7').pack(expand=1)
 
 		######################## MOSTRAR TODOS LOS PRODUCTOS DE LA BASE DE DATOS MYSQL #################
-		Label(self.frame_dos, text= 'Datos de MySQL', bg='white', fg= 'DarkOrchid1', font= ('Comic Sans MS', 12, 'bold')).grid(column =0, row=0)
-		Button(self.frame_dos, text='ACTUALIZAR',fg='black' ,font = ('Arial', 11,'bold'), command= self.datos_totales, bg = 'green2', bd = 2, borderwidth=2).grid(column=1, row=0, pady=5)
+		Label(self.frame_dos, text= 'Datos de MySQL', bg='#FEF5E7', fg= '#A569BD', font= ('Comic Sans MS', 12, 'bold')).grid(column =0, row=0)
+		Button(self.frame_dos, text='ACTUALIZAR',fg='black' ,font = ('Arial', 11,'bold'), command= self.datos_totales, bg = '#A569BD', bd = 2, borderwidth=2).grid(column=1, row=0, pady=5)
 		#ESTILO DE LAS TABLAS DE DATOS TREEVIEW
 		estilo_tabla = ttk.Style()
-		estilo_tabla.configure("Treeview", font= ('Helvetica', 10, 'bold'), foreground='black',  background='white')  #, fieldbackground='yellow'
+		estilo_tabla.configure("Treeview", font= ('Helvetica', 10, 'bold'), foreground='black',  background='#FEF5E7')  #, fieldbackground='yellow'
 		estilo_tabla.map('Treeview',background=[('selected', 'DarkOrchid1')], foreground=[('selected','black')] )		
 		estilo_tabla.configure('Heading',background = 'white', foreground='navy',padding=3, font= ('Arial', 10, 'bold'))
 		estilo_tabla.configure('Item',foreground = 'white', focuscolor ='DarkOrchid1')
@@ -196,27 +197,29 @@ class Ventana(Frame):
 		ladoy.grid(column = 1, row = 0, sticky='ns')
 
 		self.tabla_uno.configure(xscrollcommand = ladox.set, yscrollcommand = ladoy.set)
-		self.tabla_uno['columns'] = ('Nombre', 'Modelo', 'Precio', 'Cantidad')
+		self.tabla_uno['columns'] = ('Crepa', 'Costo', 'Unidades', 'Precio','Utilidad')
 		self.tabla_uno.column('#0', minwidth=100, width=120, anchor='center')
-		self.tabla_uno.column('Nombre', minwidth=100, width=130 , anchor='center')
-		self.tabla_uno.column('Modelo', minwidth=100, width=120, anchor='center' )
-		self.tabla_uno.column('Precio', minwidth=100, width=120 , anchor='center')
-		self.tabla_uno.column('Cantidad', minwidth=100, width=105, anchor='center')
+		self.tabla_uno.column('Crepa', minwidth=100, width=130 , anchor='center')
+		self.tabla_uno.column('Costo', minwidth=100, width=120, anchor='center' )
+		self.tabla_uno.column('Unidades', minwidth=100, width=120 , anchor='center')
+		self.tabla_uno.column('Precio', minwidth=100, width=105, anchor='center')
+        #self.tabla_uno.column('Utilidad', minwidth=100, width=105, anchor='center')
 
-		self.tabla_uno.heading('#0', text='Codigo', anchor ='center')
-		self.tabla_uno.heading('Nombre', text='Nombre', anchor ='center')
-		self.tabla_uno.heading('Modelo', text='Modelo', anchor ='center')
-		self.tabla_uno.heading('Precio', text='Precio', anchor ='center')
-		self.tabla_uno.heading('Cantidad', text='Cantidad', anchor ='center')
-		self.tabla_uno.bind("<<TreeviewSelect>>", self.obtener_fila) 
+		self.tabla_uno.heading('#0', text='Crepa', anchor ='center')
+		self.tabla_uno.heading('Crepa', text='Costo', anchor ='center')
+		self.tabla_uno.heading('Costo', text='Unidades', anchor ='center')
+		self.tabla_uno.heading('Unidades', text='Precio', anchor ='center')
+		self.tabla_uno.heading('Precio', text='Utilidad', anchor ='center')
+        #self.tabla_uno.heading('Utilidad', minwidth=100, width=105, anchor='center')
+		self.tabla_uno.bind("<<TreeviewSelect>>", self.obtener_fila)
 
 		######################## REGISTRAR  NUEVOS PRODUCTOS #################
 		Label(self.frame_tres, text = 'Agregar Nuevos Datos',fg='purple', bg ='white', font=('Kaufmann BT',24,'bold')).grid(columnspan=2, column=0,row=0, pady=5)
-		Label(self.frame_tres, text = 'Codigo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=1, pady=15, padx=5)
-		Label(self.frame_tres, text = 'Nombre',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15)
-		Label(self.frame_tres, text = 'Modelo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
+		Label(self.frame_tres, text = 'Crepa',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=1, pady=15, padx=5)
+		Label(self.frame_tres, text = 'Costo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15)
+		Label(self.frame_tres, text = 'Unidades',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
 		Label(self.frame_tres, text = 'Precio', fg='navy',bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=4, pady=15)
-		Label(self.frame_tres, text = 'Cantidad',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)  ##E65561
+		Label(self.frame_tres, text = 'Utilidad',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)  ##E65561
 
 		Entry(self.frame_tres, textvariable=self.codigo , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=1)
 		Entry(self.frame_tres, textvariable=self.nombre , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=2)
