@@ -1,5 +1,4 @@
 from tkinter import *
-from tokenize import String
 
 #Raíz
 raiz = Tk()
