@@ -1,22 +1,18 @@
-import tkinter as tk
+from tkinter import *
 
 OptionList = [
-    "Selecciona una opcion",
-"Aries",
-"Taurus",
-"Gemini",
-"Cancer"
+    "Selecciona una opcion", "Italia", "Hawaii", "Tres quesos", "Chocomenta", "Dopamina", "Cajetosa", "De la casa"
 ] 
 
-app = tk.Tk()
+app = Tk()
 
-app.geometry('100x200')
+app.geometry('910x390')
 
-variable = tk.StringVar(app)
+variable = StringVar(app)
 variable.set(OptionList[0])
 
-opt = tk.OptionMenu(app, variable, *OptionList)
-opt.config(width=90, font=('Helvetica', 12))
+opt = OptionMenu(app, variable, *OptionList)
+opt.config(width=50)
 opt.pack()
 
 app.mainloop()
