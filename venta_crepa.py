@@ -1,6 +1,8 @@
 from msilib.schema import File
-from tkinter import  Tk, Button, Entry, Label, ttk, PhotoImage
-from tkinter import  StringVar,Scrollbar,Frame
+from tkinter import  END, Tk, Button, Entry, Label, ttk, PhotoImage
+from tkinter import  StringVar,Scrollbar,Frame, IntVar
+
+from numpy import product
 from conexion import*
 import time
 class Ventana(Frame):
@@ -15,6 +17,12 @@ class Ventana(Frame):
 		self.precio = StringVar()
 		self.cantidad = StringVar()
 		self.fecha = StringVar()
+		#self.ventana = ventana
+		self.productos = ("Italia","Hawaii","Tres Quesos","Chocomenta","Dopamina","Cajetosa","De la casa","1 a 2 ingredientes","2 a 4 ingredientes","4 a 6 ingredientes")
+		self.cajaCantidad = IntVar()
+		self.cajaTotal = IntVar()
+		self.total = 0
+		#self.dibujarComponentes()
 
 		self.buscar = StringVar()
 		self.buscar_actualiza =  StringVar()
@@ -280,8 +288,33 @@ class Ventana(Frame):
 		self.tabla_dos.heading('Cantidad', text='Utilidad', anchor ='center')
 		self.tabla_dos.heading('Fecha', text='Fecha', anchor ='center')
 		self.tabla_dos.bind("<<TreeviewSelect>>", self.obtener_fila)  	
-		######################## AJUSTES #################
-
+		######################## CAJA REGISTRADORA #################
+		Label(self.frame_seis,text="Selecciona tu producto: ").place(x=10,y=10)
+		Label(self.frame_seis,text="Seleciona la cantidad: ").place(x=10,y=60)
+		Label(self.frame_seis,text="El total es: ").place(x=450,y=400)
+		self.combo = ttk.Combobox(self.frame_seis,state="readonly")
+		self.combo.place(x=10,y=35)
+		self.combo["values"]=self.productos
+		self.combo.current(0)
+		Entry(self.frame_seis,textvariable=self.cajaCantidad).place(x=10,y=85)
+		Entry(self.frame_seis,textvariable=self.cajaTotal).place(x=520,y=400)
+		Button(self.frame_seis,text="Agregar",command=self.agregarProducto).place(x=10,y=110)
+		self.tabla = ttk.Treeview(self.frame_seis,columns=("Cantidad","Subtotal"))
+		self.tabla.heading("#0",text="Producto")
+		self.tabla.heading("Cantidad",text="Cantidad")
+		self.tabla.heading("Subtotal",text="Subtotal")
+		self.tabla.place(x=10,y=150)
+        # "Italia-$80","Hawaii-$75","Tres Quesos-$75","Chocomenta-$65","Dopamina-$65","Cajetosa-$65","De la casa-$60","1 a 2 ingredientes-$55","2 a 4 ingredientes-$70","4 a 6 ingredientes-$85"
+	def agregarProducto(self):
+		texto = self.combo.get()
+		producto = texto
+		precios = {"Italia":80,"Hawaii":75,"Tres Quesos":75,"Chocomenta":65,"Dopamina":65,"Cajetosa":65,"De la casa":60,"1 a 2 ingredientes":55,"2 a 4 ingredientes":70,"4 a 6 ingredientes":85}
+		precio = precios[producto]
+		cantidad = self.cajaCantidad.get()
+		subtotal = int(precio)*int(cantidad)
+		self.tabla.insert("",END,text=producto,values=(cantidad,"$"+str(subtotal)))
+		self.total = self.total + subtotal
+		self.cajaTotal.set("$"+str(self.total))
 
 	def datos_totales(self):
 		datos = self.base_datos.mostrar_productos()
