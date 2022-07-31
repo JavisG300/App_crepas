@@ -14,6 +14,8 @@ class Ventana(Frame):
 		self.modelo = StringVar()
 		self.precio = StringVar()
 		self.cantidad = StringVar()
+		self.fecha = StringVar()
+
 		self.buscar = StringVar()
 		self.buscar_actualiza =  StringVar()
 		self.id = StringVar()
@@ -95,23 +97,7 @@ class Ventana(Frame):
 					self.pantalla_inicial()
 			self.menu = True
 
-	def cambiar_color(self):
-		if self.color == True:
-			self.bt_color['image'] = self.dia
-			self.titulo.config(fg='deep sky blue')
-			self.frame_seis.config(bg= '#FEF5E7')
-			self.text_ajustes.config(bg='#FEF5E7')
-			self.texto.config(bg='#FEF5E7')
-			self.bt_color.config(bg='#FEF5E7',activebackground='#FEF5E7')	
-			self.color = False	
-		else:
-			self.bt_color['image'] = self.noche
-			self.titulo.config(fg='DarkOrchid1')
-			self.frame_seis.config(bg= 'white')
-			self.text_ajustes.config(bg='white')
-			self.texto.config(bg='white')
-			self.bt_color.config(bg='white',activebackground='white')	
-			self.color = True
+	
 	def widgets(self):
 		self.imagen_inicio = PhotoImage(file ='inicio.png')
 		self.imagen_menu = PhotoImage(file ='menu.png')
@@ -203,14 +189,14 @@ class Ventana(Frame):
 		self.tabla_uno.column('Costo', minwidth=100, width=120, anchor='center' )
 		self.tabla_uno.column('Unidades', minwidth=100, width=120 , anchor='center')
 		self.tabla_uno.column('Precio', minwidth=100, width=105, anchor='center')
-        #self.tabla_uno.column('Utilidad', minwidth=100, width=105, anchor='center')
+		self.tabla_uno.column('Utilidad', minwidth=100, width=105, anchor='center')
 
 		self.tabla_uno.heading('#0', text='Crepa', anchor ='center')
 		self.tabla_uno.heading('Crepa', text='Costo', anchor ='center')
 		self.tabla_uno.heading('Costo', text='Unidades', anchor ='center')
 		self.tabla_uno.heading('Unidades', text='Precio', anchor ='center')
 		self.tabla_uno.heading('Precio', text='Utilidad', anchor ='center')
-        #self.tabla_uno.heading('Utilidad', minwidth=100, width=105, anchor='center')
+		self.tabla_uno.heading('Utilidad', text='Fecha',anchor ='center')
 		self.tabla_uno.bind("<<TreeviewSelect>>", self.obtener_fila)
 
 		######################## REGISTRAR  NUEVOS PRODUCTOS #################
@@ -219,18 +205,22 @@ class Ventana(Frame):
 		Label(self.frame_tres, text = 'Costo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15)
 		Label(self.frame_tres, text = 'Unidades',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
 		Label(self.frame_tres, text = 'Precio', fg='navy',bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=4, pady=15)
-		Label(self.frame_tres, text = 'Utilidad',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)  ##E65561
+		Label(self.frame_tres, text = 'Utilidad',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)
+		Label(self.frame_tres, text = 'Fecha',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=6, pady=15)
 
 		Entry(self.frame_tres, textvariable=self.codigo , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=1)
 		Entry(self.frame_tres, textvariable=self.nombre , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=2)
 		Entry(self.frame_tres, textvariable=self.modelo , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=3)
 		Entry(self.frame_tres, textvariable=self.precio , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=4)
 		Entry(self.frame_tres, textvariable=self.cantidad , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=5)
+		Entry(self.frame_tres, textvariable=self.fecha , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "green2", highlightthickness=5).grid(column=1,row=6)
 
-		Button(self.frame_tres,command= self.agregar_datos, text='REGISTRAR', font=('Arial',10,'bold'), bg='magenta2').grid(column=3,row=6, pady=10, padx=4)
+
+
+		Button(self.frame_tres,command= self.agregar_datos, text='REGISTRAR', font=('Arial',10,'bold'), bg='magenta2').grid(column=3,row=7, pady=10, padx=4)
 		Label(self.frame_tres, image= self.imagen_uno, bg= 'white').grid(column= 3, rowspan= 5, row = 0, padx= 50)
 		self.aviso_guardado = Label(self.frame_tres, bg= 'white', font=('Comic Sans MS', 12), fg='black')
-		self.aviso_guardado.grid(columnspan= 2 , column =0, row = 6, padx= 5)
+		self.aviso_guardado.grid(columnspan= 2 , column =0, row = 7, padx= 5)
 
 		########################   ACTUALIZAR LOS PRODUCTOS REGISTRADOS     #################
 		Label(self.frame_cuatro, text = 'Actualizar Datos',fg='purple', bg ='white', font=('Kaufmann BT',24,'bold')).grid(columnspan=4, row=0)		
@@ -240,19 +230,21 @@ class Ventana(Frame):
 		self.aviso_actualizado = Label(self.frame_cuatro, fg='black', bg ='white', font=('Arial',12,'bold'))
 		self.aviso_actualizado.grid(columnspan= 2, row=7, pady=10, padx=5)
 
-		Label(self.frame_cuatro, text = 'Codigo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15, padx=10)
-		Label(self.frame_cuatro, text = 'Nombre',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
-		Label(self.frame_cuatro, text = 'Modelo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=4, pady=15)
+		Label(self.frame_cuatro, text = 'Crepa',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15, padx=10)
+		Label(self.frame_cuatro, text = 'Costo',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
+		Label(self.frame_cuatro, text = 'Unidades',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=4, pady=15)
 		Label(self.frame_cuatro, text = 'Precio', fg='navy',bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)
-		Label(self.frame_cuatro, text = 'Cantidad',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=6, pady=15)  ##E65561
+		Label(self.frame_cuatro, text = 'Utilidad',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=6, pady=15)
+		Label(self.frame_cuatro, text = 'Fecha',fg='navy', bg ='white', font=('Rockwell',13,'bold')).grid(column=0,row=7, pady=15)
 
 		Entry(self.frame_cuatro, textvariable=self.codigo , font=('Comic Sans MS', 12), highlightbackground = "deep sky blue", highlightcolor= "green", highlightthickness=5).grid(column=1,row=2)
 		Entry(self.frame_cuatro, textvariable=self.nombre , font=('Comic Sans MS', 12), highlightbackground = "deep sky blue", highlightcolor= "green", highlightthickness=5).grid(column=1,row=3)
 		Entry(self.frame_cuatro, textvariable=self.modelo , font=('Comic Sans MS', 12), highlightbackground = "deep sky blue", highlightcolor= "green", highlightthickness=5).grid(column=1,row=4)
 		Entry(self.frame_cuatro, textvariable=self.precio , font=('Comic Sans MS', 12), highlightbackground = "deep sky blue", highlightcolor= "green", highlightthickness=5).grid(column=1,row=5)
 		Entry(self.frame_cuatro, textvariable=self.cantidad , font=('Comic Sans MS', 12), highlightbackground = "deep sky blue", highlightcolor= "green", highlightthickness=5).grid(column=1,row=6)
+		Entry(self.frame_cuatro, textvariable=self.fecha , font=('Comic Sans MS', 12), highlightbackground = "deep sky blue", highlightcolor= "green", highlightthickness=5).grid(column=1,row=7)
 
-		Button(self.frame_cuatro,command= self.actualizar_tabla, text='ACTUALIZAR', font=('Arial',12,'bold'), bg='magenta2').grid(column=2, columnspan= 2 ,row=7, pady=2)
+		Button(self.frame_cuatro,command= self.actualizar_tabla, text='ACTUALIZAR', font=('Arial',12,'bold'), bg='magenta2').grid(column=2, columnspan= 2 ,row=8, pady=2)
 		Label(self.frame_cuatro, image= self.imagen_dos, bg='white').grid(column= 2,columnspan= 2, rowspan= 5, row = 1, padx=2)
 
 		######################## BUSCAR y ELIMINAR DATOS #################
@@ -274,25 +266,22 @@ class Ventana(Frame):
 		ladoy.grid(column = 1, row = 0, sticky='ns')
 
 		self.tabla_dos.configure(xscrollcommand = ladox.set, yscrollcommand = ladoy.set,)
-		self.tabla_dos['columns'] = ('Nombre', 'Modelo', 'Precio', 'Cantidad')
+		self.tabla_dos['columns'] = ('Nombre', 'Modelo', 'Precio', 'Cantidad','Fecha')
 		self.tabla_dos.column('#0', minwidth=100, width=120, anchor='center')
 		self.tabla_dos.column('Nombre', minwidth=100, width=130 , anchor='center')
 		self.tabla_dos.column('Modelo', minwidth=100, width=120, anchor='center' )
 		self.tabla_dos.column('Precio', minwidth=100, width=120 , anchor='center')
 		self.tabla_dos.column('Cantidad', minwidth=100, width=105, anchor='center')
-		self.tabla_dos.heading('#0', text='Codigo', anchor ='center')
-		self.tabla_dos.heading('Nombre', text='Nombre', anchor ='center')
-		self.tabla_dos.heading('Modelo', text='Modelo', anchor ='center')
+		self.tabla_dos.column('Fecha', minwidth=100, width=105, anchor='center')
+		self.tabla_dos.heading('#0', text='Crepa', anchor ='center')
+		self.tabla_dos.heading('Nombre', text='Costo', anchor ='center')
+		self.tabla_dos.heading('Modelo', text='Unidades', anchor ='center')
 		self.tabla_dos.heading('Precio', text='Precio', anchor ='center')
-		self.tabla_dos.heading('Cantidad', text='Cantidad', anchor ='center')
+		self.tabla_dos.heading('Cantidad', text='Utilidad', anchor ='center')
+		self.tabla_dos.heading('Fecha', text='Fecha', anchor ='center')
 		self.tabla_dos.bind("<<TreeviewSelect>>", self.obtener_fila)  	
 		######################## AJUSTES #################
-		self.text_ajustes = Label(self.frame_seis, text = 'Configuracion',fg='purple', bg ='white', font=('Kaufmann BT',28,'bold'))
-		self.text_ajustes.pack(expand=1)
-		self.bt_color = Button(self.frame_seis, image = self.noche , command= self.cambiar_color, bg = 'white', bd=0, activebackground='white')
-		self.bt_color.pack(expand=1)
-		self.texto = Label(self.frame_seis, text = '@autor:Magno Efren \n Desarrollado en Python',fg='red', bg ='white', font=('Kaufmann BT',18))
-		self.texto.pack(expand=1)
+
 
 	def datos_totales(self):
 		datos = self.base_datos.mostrar_productos()
@@ -300,7 +289,7 @@ class Ventana(Frame):
 		i = -1
 		for dato in datos:
 			i= i+1
-			self.tabla_uno.insert('',i, text = datos[i][1:2], values=datos[i][2:6])
+			self.tabla_uno.insert('',i, text = datos[i][1:2], values=datos[i][2:7])
 
 	def agregar_datos(self):
 		codigo = self.codigo.get()
@@ -308,10 +297,11 @@ class Ventana(Frame):
 		modelo = self.modelo.get()
 		precio = self.precio.get()
 		cantidad = self.cantidad.get()
-		datos = (nombre, modelo, precio, cantidad)
-		if codigo and nombre and modelo and precio and cantidad !='':
+		fecha = self.fecha.get()
+		datos = (nombre, modelo, precio, cantidad, fecha)
+		if codigo and nombre and modelo and precio and cantidad and fecha !='':
 			self.tabla_uno.insert('',0, text = codigo, values=datos)
-			self.base_datos.inserta_producto(codigo, nombre, modelo, precio, cantidad)
+			self.base_datos.inserta_producto(codigo, nombre, modelo, precio, cantidad,fecha)
 			self.aviso_guardado['text'] = 'Datos Guardados'
 			self.limpiar_datos()
 			self.aviso_guardado.update()						
@@ -351,7 +341,8 @@ class Ventana(Frame):
 		modelo = self.modelo.get()
 		precio = self.precio.get()
 		cantidad = self.cantidad.get()
-		self.base_datos.actualiza_productos(Id, codigo, nombre, modelo, precio, cantidad)		
+		fecha = self.fecha.get()
+		self.base_datos.actualiza_productos(Id, codigo, nombre, modelo, precio, cantidad,fecha)		
 		self.aviso_actualizado['text'] = 'Datos Actualizados'			
 		self.indica_busqueda.update()						
 		time.sleep(1) 
@@ -364,6 +355,7 @@ class Ventana(Frame):
 		self.modelo.set('')
 		self.precio.set('')
 		self.cantidad.set('')
+		self.fecha.set('')
 
 	def buscar_nombre(self):
 		nombre_producto = self.buscar.get()
@@ -377,7 +369,7 @@ class Ventana(Frame):
 		i = -1
 		for dato in nombre_buscado:
 			i= i+1
-			self.tabla_dos.insert('',i, text = nombre_buscado[i][1:2], values=nombre_buscado[i][2:6])
+			self.tabla_dos.insert('',i, text = nombre_buscado[i][1:2], values=nombre_buscado[i][2:7])
 	def eliminar_fila(self):
 		fila = self.tabla_dos.selection()
 		if len(fila) !=0:

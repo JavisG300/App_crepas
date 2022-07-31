@@ -12,8 +12,8 @@ class Registro_datos():
 
     def inserta_producto(self,crepa,costo, unidades, precio, utilidad, fecha):
         cur = self.conexion.cursor()
-        sql='''INSERT INTO ventas (Crepa,Costo, Unidades, Precio, Utilidad, Fecha) 
-        VALUES('{}', '{}','{}', '{}','{}')'''.format(crepa, costo, unidades, precio, utilidad, fecha)
+        sql='''INSERT INTO ventas (Crepa, Costo, Unidades, Precio, Utilidad, Fecha) 
+        VALUES('{}', '{}','{}', '{}','{}','{}')'''.format(crepa, costo, unidades, precio, utilidad, fecha)
         cur.execute(sql)
         self.conexion.commit()    
         cur.close()
@@ -36,7 +36,17 @@ class Registro_datos():
 
     def elimina_productos(self,nombre):
         cur = self.conexion.cursor()
-        sql='''DELETE FROM ventas WHERE NOMBRE = {}'''.format(nombre)
+        sql="DELETE FROM crepas.ventas WHERE Crepa = {}".format(nombre)
         cur.execute(sql)
         self.conexion.commit()    
         cur.close()
+    
+    def actualiza_productos(self,Id, crepa,costo, unidades, precio, utilidad, fecha):
+        cur = self.conexion.cursor()
+        sql ='''UPDATE ventas SET  Crepa ='{}', Costo = '{}' , Unidades = '{}', Precio = '{}', Utilidad = '{}', Fecha = '{}'
+        WHERE Id = '{}' '''.format(crepa,costo, unidades, precio, utilidad, fecha, Id)
+        cur.execute(sql)
+        a = cur.rowcount
+        self.conexion.commit()    
+        cur.close()
+        return a  
