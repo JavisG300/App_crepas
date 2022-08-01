@@ -1,3 +1,4 @@
+from distutils.command.config import config
 from msilib.schema import File
 from tkinter import  END, Tk, Button, Entry, Label, ttk, PhotoImage
 from tkinter import  StringVar,Scrollbar,Frame, IntVar
@@ -22,7 +23,20 @@ class Ventana(Frame):
 		self.cajaCantidad = IntVar()
 		self.cajaTotal = IntVar()
 		self.total = 0
-		#self.dibujarComponentes()
+		self.CostoPantalla = StringVar()
+		self.cuadro1 = StringVar()
+		self.cuadro2 = StringVar()
+		self.cuadro3 = StringVar()
+		self.cuadro4 = StringVar()
+		self.cuadro5 = StringVar()
+		self.cuadro6 = StringVar()
+		self.cuadro1_1 = StringVar()
+		self.cuadro2_1= StringVar()
+		self.cuadro3_1= StringVar()
+		self.cuadro4_1= StringVar()
+		self.cuadro5_1= StringVar()
+		self.cuadro6_1= StringVar()
+
 
 		self.buscar = StringVar()
 		self.buscar_actualiza =  StringVar()
@@ -72,8 +86,6 @@ class Ventana(Frame):
 		self.frame_cinco.columnconfigure(1, weight=1)
 		self.frame_cinco.columnconfigure(2, weight=1)
 		self.frame_cinco.rowconfigure(2, weight=1)
-		self.frame_tabla_dos.columnconfigure(0, weight=1)
-		self.frame_tabla_dos.rowconfigure(0, weight=1)
 
 	def pantalla_ajustes(self):
 		self.paginas.select([self.frame_seis])
@@ -118,8 +130,6 @@ class Ventana(Frame):
 		self.logo = PhotoImage(file = 'logo.png')
 		self.imagen_uno = PhotoImage(file ='imagen_uno.png')
 		self.imagen_dos= PhotoImage(file ='imagen_dos.png')
-		self.dia = PhotoImage(file ='dia.png')
-		self.noche= PhotoImage(file ='noche.png')
 		self.bt_inicio = Button(self.frame_inicio, image= self.imagen_inicio, bg='#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.menu_lateral)
 		self.bt_inicio.grid(column=0, row=0, padx=5, pady=10)
 		self.bt_cerrar = Button(self.frame_inicio, image= self.imagen_menu, bg='#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.menu_lateral)
@@ -131,11 +141,11 @@ class Ventana(Frame):
 		Button(self.frame_menu, image= self.imagen_buscar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_buscar).grid(column=0, row=4, pady=20,padx=10)		
 		Button(self.frame_menu, image= self.imagen_ajustes, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_ajustes).grid(column=0, row=5, pady=20,padx=10)
 		
-		Label(self.frame_menu, text= 'Base Datos', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=1, pady=20, padx=2)
+		Label(self.frame_menu, text= 'Ventas', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=1, pady=20, padx=2)
 		Label(self.frame_menu, text= 'Registrar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=2, pady=20, padx=2)
 		Label(self.frame_menu, text= ' Actualizar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=3, pady=20, padx=2)
-		Label(self.frame_menu, text= 'Eliminar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=4, pady=20, padx=2)	
-		Label(self.frame_menu, text= 'Ajustes', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=5, pady=20, padx=2)
+		Label(self.frame_menu, text= 'Costos', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=4, pady=20, padx=2)	
+		Label(self.frame_menu, text= 'Caja', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=5, pady=20, padx=2)
 
         	#############################  CREAR  PAGINAS  ##############################
 		estilo_paginas = ttk.Style()
@@ -231,7 +241,7 @@ class Ventana(Frame):
 		self.aviso_guardado.grid(columnspan= 2 , column =0, row = 7, padx= 5)
 
 		########################   ACTUALIZAR LOS PRODUCTOS REGISTRADOS     #################
-		Label(self.frame_cuatro, text = 'Actualizar Datos',fg='purple', bg ='white', font=('Kaufmann BT',24,'bold')).grid(columnspan=4, row=0)		
+		Label(self.frame_cuatro, text = 'Actualizar Datos',fg='#A569BD', bg ='white', font=('Kaufmann BT',24,'bold')).grid(columnspan=4, row=0)		
 		Label(self.frame_cuatro, text = 'Ingrese el nombre del producto a actualizar',fg='black', bg ='white', font=('Rockwell',12)).grid(columnspan=2,row=1)
 		Entry(self.frame_cuatro, textvariable= self.buscar_actualiza , font=('Comic Sans MS', 12), highlightbackground = "magenta2", width=12, highlightthickness=5).grid(column=2,row=1, padx=5)
 		Button(self.frame_cuatro, command= self.actualizar_datos, text='BUSCAR', font=('Arial',12,'bold'), bg='deep sky blue').grid(column=3,row=1, pady=5, padx=15)
@@ -255,39 +265,50 @@ class Ventana(Frame):
 		Button(self.frame_cuatro,command= self.actualizar_tabla, text='ACTUALIZAR', font=('Arial',12,'bold'), bg='magenta2').grid(column=2, columnspan= 2 ,row=8, pady=2)
 		Label(self.frame_cuatro, image= self.imagen_dos, bg='white').grid(column= 2,columnspan= 2, rowspan= 5, row = 1, padx=2)
 
-		######################## BUSCAR y ELIMINAR DATOS #################
-		Label(self.frame_cinco, text = 'Buscar y Eliminar Datos',fg='purple', bg ='white', font=('Kaufmann BT',24,'bold')).grid(columnspan= 4,  row=0,sticky='nsew',padx=2)
-		Entry(self.frame_cinco, textvariable= self.buscar , font=('Comic Sans MS', 12),highlightbackground = "DarkOrchid1", highlightcolor= "deep sky blue", highlightthickness=5).grid(column=0,row=1,sticky='nsew', padx=2)
-		Button(self.frame_cinco,command = self.buscar_nombre, text='BUSCAR POR NOMBRE', font=('Arial',8,'bold'), bg='deep sky blue').grid(column = 1, row=1, sticky='nsew', padx=2)		
-		Button(self.frame_cinco,command = self.eliminar_fila, text='ELIMINAR', font=('Arial',8,'bold'), bg='red').grid(column = 2, row=1, sticky='nsew',padx=2)
-		self.indica_busqueda= Label(self.frame_cinco, width= 15,text = '',fg='purple', bg ='white', font=('Arial',12,'bold'))
-		self.indica_busqueda.grid(column = 3,  row=1,padx=2)
-
-		#TABLA DOS
-		self.frame_tabla_dos = Frame(self.frame_cinco, bg= 'gray90')
-		self.frame_tabla_dos.grid(columnspan=4, row=2, sticky='nsew')
-		self.tabla_dos = ttk.Treeview(self.frame_tabla_dos) 
-		self.tabla_dos.grid(column=0, row=0, sticky='nsew')
-		ladox = ttk.Scrollbar(self.frame_tabla_dos, orient = 'horizontal', command= self.tabla_dos.xview)
-		ladox.grid(column=0, row = 1, sticky='ew') 
-		ladoy = ttk.Scrollbar(self.frame_tabla_dos, orient ='vertical', command = self.tabla_dos.yview)
-		ladoy.grid(column = 1, row = 0, sticky='ns')
-
-		self.tabla_dos.configure(xscrollcommand = ladox.set, yscrollcommand = ladoy.set,)
-		self.tabla_dos['columns'] = ('Nombre', 'Modelo', 'Precio', 'Cantidad','Fecha')
-		self.tabla_dos.column('#0', minwidth=100, width=120, anchor='center')
-		self.tabla_dos.column('Nombre', minwidth=100, width=130 , anchor='center')
-		self.tabla_dos.column('Modelo', minwidth=100, width=120, anchor='center' )
-		self.tabla_dos.column('Precio', minwidth=100, width=120 , anchor='center')
-		self.tabla_dos.column('Cantidad', minwidth=100, width=105, anchor='center')
-		self.tabla_dos.column('Fecha', minwidth=100, width=105, anchor='center')
-		self.tabla_dos.heading('#0', text='Crepa', anchor ='center')
-		self.tabla_dos.heading('Nombre', text='Costo', anchor ='center')
-		self.tabla_dos.heading('Modelo', text='Unidades', anchor ='center')
-		self.tabla_dos.heading('Precio', text='Precio', anchor ='center')
-		self.tabla_dos.heading('Cantidad', text='Utilidad', anchor ='center')
-		self.tabla_dos.heading('Fecha', text='Fecha', anchor ='center')
-		self.tabla_dos.bind("<<TreeviewSelect>>", self.obtener_fila)  	
+		######################## CALCULAR COSTOS #################
+		Label(self.frame_cinco, text = 'Calcular costos',fg='#A569BD', bg ='white', font=('Kaufmann BT',24,'bold')).grid(columnspan= 4,  row=0,sticky='nsew',padx=2)
+	#Ingrediente 1
+		Entry(self.frame_cinco,textvariable=self.cuadro1).grid(row=1,column=1)
+		Label(self.frame_cinco,text='Ingrediente 1: ',padx = 5,pady=10).grid(row=1,column=0)
+	#Gramos ingrediente 1
+		Entry(self.frame_cinco,textvariable=self.cuadro1_1).grid(row=1,column=3)
+		Label(self.frame_cinco,text='gr: ',padx = 5,pady=10).grid(row=1,column=2)
+	#Ingrediente 2
+		Entry(self.frame_cinco,textvariable=self.cuadro2).grid(row=2,column=1)
+		Label(self.frame_cinco,text='Ingrediente 2: ',padx = 5,pady=10).grid(row=2,column=0)
+	#Gramos ingrediente 2
+		Entry(self.frame_cinco,textvariable=self.cuadro2_1).grid(row=2,column=3)
+		Label(self.frame_cinco,text='gr: ',padx = 5,pady=10).grid(row=2,column=2)
+	#Ingrediente 3
+		Entry(self.frame_cinco,textvariable=self.cuadro3).grid(row=3,column=1)
+		Label(self.frame_cinco,text='Ingrediente 3: ',padx = 5,pady=10).grid(row=3,column=0)
+	#Gramos ingrediente 3
+		Entry(self.frame_cinco,textvariable=self.cuadro3_1).grid(row=3,column=3)
+		Label(self.frame_cinco,text='gr: ',padx = 5,pady=10).grid(row=3,column=2)
+	#Ingrediente 4
+		Entry(self.frame_cinco,textvariable=self.cuadro4).grid(row=4,column=1)
+		Label(self.frame_cinco,text='Ingrediente 4: ',padx = 5,pady=10).grid(row=4,column=0)
+	#Gramos ingrediente 4
+		Entry(self.frame_cinco,textvariable=self.cuadro4_1).grid(row=4,column=3)
+		Label(self.frame_cinco,text='gr: ',padx = 5,pady=10).grid(row=4,column=2)
+	#Ingrediente 5
+		Entry(self.frame_cinco,textvariable=self.cuadro5).grid(row=5,column=1)
+		Label(self.frame_cinco,text='Ingrediente 5: ',padx = 5,pady=10).grid(row=5,column=0)
+	#Gramos ingrediente 5
+		Entry(self.frame_cinco,textvariable=self.cuadro5_1).grid(row=5,column=3)
+		Label(self.frame_cinco,text='gr: ',padx = 5,pady=10).grid(row=5,column=2)
+	#Ingrediente 6
+		Entry(self.frame_cinco,textvariable=self.cuadro6).grid(row=6,column=1)
+		Label(self.frame_cinco,text='Ingrediente 6: ',padx = 5,pady=10).grid(row=6,column=0)
+	#Gramos ingrediente 6
+		Entry(self.frame_cinco,textvariable=self.cuadro6_1).grid(row=6,column=3)
+		Label(self.frame_cinco,text='gr: ',padx = 5,pady=10).grid(row=6,column=2)
+	#Crepa creada
+		Entry(self.frame_cinco, textvariable=self.CostoPantalla).grid(row=7, column=2, padx=10,pady=10)
+		Label(self.frame_cinco,text='Costo total ',padx = 10,pady=15).grid(row=7,column=1)
+		Button(self.frame_cinco, text='Calcular',pady=5,command=self.codigoBoton, font=('Arial',12,'bold'), bg='#A569BD').grid(column=3, columnspan= 4 ,row=7, pady=2)
+    
+			
 		######################## CAJA REGISTRADORA #################
 		Label(self.frame_seis,text="Selecciona tu producto: ").place(x=10,y=10)
 		Label(self.frame_seis,text="Seleciona la cantidad: ").place(x=10,y=60)
@@ -374,6 +395,8 @@ class Ventana(Frame):
 				self.modelo.set(nombre_buscado[i][3])
 				self.precio.set(nombre_buscado[i][4])
 				self.cantidad.set(nombre_buscado[i][5])
+				self.fecha.set(nombre_buscado[i][6])
+
 
 	def actualizar_tabla(self):	
 		Id = self.id.get() 	
@@ -438,6 +461,24 @@ class Ventana(Frame):
 			return
 		data = self.tabla_dos.item(current_item)
 		self.nombre_borrar = data['values'][0]
+		    
+	def codigoBoton(self):
+		primer_ingrediente = self.cuadro1.get().strip().lower()
+		gramo1 = self.cuadro1_1.get()
+		segundo_ingrediente = segundo_ingrediente = self.cuadro2.get().strip().lower()
+		gramo2 = self.cuadro2_1.get()
+		tercer_ingrediente = self.cuadro3.get().strip().lower()
+		gramo3 = self.cuadro3_1.get()
+		cuarto_ingrediente = self.cuadro4.get().strip().lower()
+		gramo4 = self.cuadro4_1.get()
+		quinto_ingrediente = self.cuadro5.get().strip().lower()
+		gramo5 = self.cuadro5_1.get()
+		sexto_ingrediente = self.cuadro6.get().strip().lower()
+		gramo6 = self.cuadro6_1.get()
+		dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14,'kitkat':0.24,'nutella':0.17,'mermelada':0.12,'lechera':0.06,'chocoretas':0.2,'duraznos':0.06,'oreo':0.1,'salsatomate':0.09,'gouda':0.21,'peperoni':0.58,'chantilly':0.06,'nuez':0.5,'manzana':0.04,'nuez':0.5,'canela':0.17,'cajeta':0.15,'platano':0.033,'fresa':0.13,'arandano':0,'na':0}
+		costo = 2.76 + 5 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)+  dic[cuarto_ingrediente]*float(gramo4)+  dic[quinto_ingrediente]*float(gramo5) +  dic[sexto_ingrediente]*float(gramo6)
+		costo = str(round(costo,2))
+		self.CostoPantalla.set(costo)
 
 if __name__ == "__main__":
 	ventana = Tk()
