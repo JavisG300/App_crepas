@@ -299,12 +299,13 @@ class Ventana(Frame):
 		Entry(self.frame_seis,textvariable=self.cajaCantidad).place(x=10,y=85)
 		Entry(self.frame_seis,textvariable=self.cajaTotal).place(x=520,y=400)
 		Button(self.frame_seis,text="Agregar",command=self.agregarProducto).place(x=10,y=110)
+		Button(self.frame_seis,text="Limpiar",command=self.limpiarcuenta).place(x=650,y=400)
 		self.tabla = ttk.Treeview(self.frame_seis,columns=("Cantidad","Subtotal"))
 		self.tabla.heading("#0",text="Producto")
 		self.tabla.heading("Cantidad",text="Cantidad")
 		self.tabla.heading("Subtotal",text="Subtotal")
 		self.tabla.place(x=10,y=150)
-        # "Italia-$80","Hawaii-$75","Tres Quesos-$75","Chocomenta-$65","Dopamina-$65","Cajetosa-$65","De la casa-$60","1 a 2 ingredientes-$55","2 a 4 ingredientes-$70","4 a 6 ingredientes-$85"
+        
 	def agregarProducto(self):
 		texto = self.combo.get()
 		producto = texto
@@ -315,6 +316,13 @@ class Ventana(Frame):
 		self.tabla.insert("",END,text=producto,values=(cantidad,"$"+str(subtotal)))
 		self.total = self.total + subtotal
 		self.cajaTotal.set("$"+str(self.total))
+
+	def limpiarcuenta(self):
+		self.tabla.delete(*self.tabla.get_children())
+		self.cajaTotal.set('')
+		self.cajaCantidad.set('')
+
+		
 
 	def datos_totales(self):
 		datos = self.base_datos.mostrar_productos()
