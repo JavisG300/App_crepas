@@ -90,6 +90,9 @@ class Ventana(Frame):
 	def pantalla_ajustes(self):
 		self.paginas.select([self.frame_seis])
 
+	def pantalla_precios(self):
+		self.paginas.select([self.frame_siete])
+
 	def menu_lateral(self):
 		if self.menu is True:
 			for i in range(50,170,10):				
@@ -126,6 +129,7 @@ class Ventana(Frame):
 		self.imagen_actualizar = PhotoImage(file ='actualizar.png')
 		self.imagen_buscar = PhotoImage(file ='buscar.png')
 		self.imagen_ajustes = PhotoImage(file ='configuracion.png')
+		self.imagen_precios = PhotoImage(file ='costos.png')
 
 		self.logo = PhotoImage(file = 'logo.png')
 		self.imagen_uno = PhotoImage(file ='imagen_uno.png')
@@ -140,12 +144,14 @@ class Ventana(Frame):
 		Button(self.frame_menu, image= self.imagen_actualizar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_actualizar).grid(column=0, row=3, pady=20,padx=10)
 		Button(self.frame_menu, image= self.imagen_buscar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_buscar).grid(column=0, row=4, pady=20,padx=10)		
 		Button(self.frame_menu, image= self.imagen_ajustes, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_ajustes).grid(column=0, row=5, pady=20,padx=10)
+		Button(self.frame_menu, image= self.imagen_precios, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_precios).grid(column=0, row=5, pady=20,padx=10)
 		
 		Label(self.frame_menu, text= 'Ventas', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=1, pady=20, padx=2)
 		Label(self.frame_menu, text= 'Registrar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=2, pady=20, padx=2)
 		Label(self.frame_menu, text= ' Actualizar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=3, pady=20, padx=2)
 		Label(self.frame_menu, text= 'Costos', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=4, pady=20, padx=2)	
 		Label(self.frame_menu, text= 'Caja', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=5, pady=20, padx=2)
+		Label(self.frame_menu, text= 'Precios', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=6, pady=20, padx=2)
 
         	#############################  CREAR  PAGINAS  ##############################
 		estilo_paginas = ttk.Style()
@@ -165,12 +171,14 @@ class Ventana(Frame):
 		self.frame_cuatro = Frame(self.paginas, bg='white')
 		self.frame_cinco = Frame(self.paginas, bg='white')
 		self.frame_seis = Frame(self.paginas, bg='white')
+		self.frame_siete = Frame(self.paginas,bg='white')
 		self.paginas.add(self.frame_uno)
 		self.paginas.add(self.frame_dos)
 		self.paginas.add(self.frame_tres)
 		self.paginas.add(self.frame_cuatro)
 		self.paginas.add(self.frame_cinco)
 		self.paginas.add(self.frame_seis)
+		self.paginas.add(self.frame_siete)
 		##############################         PAGINAS       #############################################
 
 		######################## FRAME TITULO #################
@@ -326,7 +334,39 @@ class Ventana(Frame):
 		self.tabla.heading("Cantidad",text="Cantidad")
 		self.tabla.heading("Subtotal",text="Subtotal")
 		self.tabla.place(x=10,y=150)
-        
+
+		######################## PRECIOS #################
+		
+		Label(self.frame_siete, text= 'Datos de MySQL', bg='#FEF5E7', fg= '#A569BD', font= ('Comic Sans MS', 12, 'bold')).grid(column =0, row=0)
+		Button(self.frame_siete, text='VER',fg='black' ,font = ('Arial', 11,'bold'), command= self.datos_precios, bg = '#A569BD', bd = 2, borderwidth=2).grid(column=1, row=0, pady=5)
+		
+		estilo_tabla_1 = ttk.Style()
+		estilo_tabla_1.configure("Treeview", font= ('Helvetica', 10, 'bold'), foreground='black',  background='#FEF5E7')  #, fieldbackground='yellow'
+		estilo_tabla_1.map('Treeview',background=[('selected', 'DarkOrchid1')], foreground=[('selected','black')] )		
+		estilo_tabla_1.configure('Heading',background = 'white', foreground='navy',padding=3, font= ('Arial', 10, 'bold'))
+		estilo_tabla_1.configure('Item',foreground = 'white', focuscolor ='DarkOrchid1')
+		estilo_tabla_1.configure('TScrollbar', arrowcolor = 'DarkOrchid1',bordercolor  ='black', troughcolor= 'DarkOrchid1',background ='white')
+		
+		#TABLA UNO_1
+		self.frame_tabla_uno_1 = Frame(self.frame_siete, bg= 'gray90')
+		self.frame_tabla_uno_1.grid(columnspan=2, row=2, sticky='nsew')		
+		self.tabla_uno_1 = ttk.Treeview(self.frame_tabla_uno_1) 
+		self.tabla_uno_1.grid(column=0, row=0, sticky='nsew')
+		ladox = ttk.Scrollbar(self.frame_tabla_uno_1, orient = 'horizontal', command= self.tabla_uno_1.xview)
+		ladox.grid(column=0, row = 1, sticky='ew') 
+		ladoy = ttk.Scrollbar(self.frame_tabla_uno_1, orient ='vertical', command = self.tabla_uno_1.yview)
+		ladoy.grid(column = 1, row = 0, sticky='ns')
+
+
+		self.tabla_uno_1.configure(xscrollcommand = ladox.set, yscrollcommand = ladoy.set)
+		self.tabla_uno_1['columns'] = ('Crepa')
+		self.tabla_uno_1.column('#0', minwidth=100, width=464, anchor='center')
+		self.tabla_uno_1.column('Crepa', minwidth=100, width=464 , anchor='center')
+
+		self.tabla_uno_1.heading('#0', text='Crepa', anchor ='center')
+		self.tabla_uno_1.heading('Crepa', text='Precio', anchor ='center')
+		self.tabla_uno_1.bind("<<TreeviewSelect>>", self.obtener_fila)
+
 	def agregarProducto(self):
 		texto = self.combo.get()
 		producto = texto
@@ -352,6 +392,14 @@ class Ventana(Frame):
 		for dato in datos:
 			i= i+1
 			self.tabla_uno.insert('',i, text = datos[i][1:2], values=datos[i][2:7])
+	
+	def datos_precios(self):
+		datos = self.base_datos.mostrar_precios()
+		self.tabla_uno_1.delete(*self.tabla_uno_1.get_children())
+		i = -1
+		for dato in datos:
+			i= i+1
+			self.tabla_uno_1.insert('',i, text = datos[i][0:1], values=datos[i][1:2])
 
 	def agregar_datos(self):
 		codigo = self.codigo.get()

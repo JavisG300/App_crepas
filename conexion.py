@@ -25,6 +25,13 @@ class Registro_datos():
         cursor.execute(sql)
         registro = cursor.fetchall()
         return registro
+    
+    def mostrar_precios(self):
+        cursor = self.conexion.cursor()
+        sql = "SELECT * FROM crepas.crepas " 
+        cursor.execute(sql)
+        registro = cursor.fetchall()
+        return registro
 
     def busca_producto(self, nombre_producto):
         cur = self.conexion.cursor()
