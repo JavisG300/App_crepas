@@ -85,7 +85,8 @@ class Ventana(Frame):
 		self.frame_cinco.columnconfigure(0, weight=1)
 		self.frame_cinco.columnconfigure(1, weight=1)
 		self.frame_cinco.columnconfigure(2, weight=1)
-		self.frame_cinco.rowconfigure(2, weight=1)
+		self.frame_cinco.columnconfigure(3, weight=1)
+		self.frame_cinco.rowconfigure(7, weight=1)
 
 	def pantalla_ajustes(self):
 		self.paginas.select([self.frame_seis])
