@@ -18,7 +18,6 @@ class Ventana(Frame):
 		self.precio = StringVar()
 		self.cantidad = StringVar()
 		self.fecha = StringVar()
-		#self.ventana = ventana
 		self.productos = ("Italia","Hawaii","Tres Quesos","Chocomenta","Dopamina","Cajetosa","De la casa","1 a 2 ingredientes","2 a 4 ingredientes","4 a 6 ingredientes")
 		self.cajaCantidad = IntVar()
 		self.cajaTotal = IntVar()
