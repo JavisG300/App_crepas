@@ -144,7 +144,7 @@ class Ventana(Frame):
 		Button(self.frame_menu, image= self.imagen_actualizar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_actualizar).grid(column=0, row=3, pady=20,padx=10)
 		Button(self.frame_menu, image= self.imagen_buscar, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_buscar).grid(column=0, row=4, pady=20,padx=10)		
 		Button(self.frame_menu, image= self.imagen_ajustes, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_ajustes).grid(column=0, row=5, pady=20,padx=10)
-		Button(self.frame_menu, image= self.imagen_precios, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_precios).grid(column=0, row=5, pady=20,padx=10)
+		Button(self.frame_menu, image= self.imagen_precios, bg= '#FEF5E7',activebackground='#FEF5E7', bd=0, command = self.pantalla_precios).grid(column=0, row=6, pady=20,padx=10)
 		
 		Label(self.frame_menu, text= 'Ventas', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=1, pady=20, padx=2)
 		Label(self.frame_menu, text= 'Registrar', bg= '#FEF5E7', fg= 'DarkOrchid1', font= ('Lucida Sans', 12, 'bold')).grid(column=1, row=2, pady=20, padx=2)
@@ -380,6 +380,7 @@ class Ventana(Frame):
 
 	def limpiarcuenta(self):
 		self.tabla.delete(*self.tabla.get_children())
+		self.total = 0
 		self.cajaTotal.set('')
 		self.cajaCantidad.set('')
 
