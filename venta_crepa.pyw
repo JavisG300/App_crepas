@@ -524,8 +524,16 @@ class Ventana(Frame):
 		gramo5 = self.cuadro5_1.get()
 		sexto_ingrediente = self.cuadro6.get().strip().lower()
 		gramo6 = self.cuadro6_1.get()
-		dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14,'kitkat':0.24,'nutella':0.17,'mermelada':0.12,'lechera':0.06,'chocoretas':0.2,'duraznos':0.06,'oreo':0.1,'salsatomate':0.09,'gouda':0.21,'peperoni':0.58,'chantilly':0.06,'nuez':0.5,'manzana':0.04,'nuez':0.5,'canela':0.17,'cajeta':0.15,'platano':0.033,'fresa':0.13,'arandano':0,'na':0}
-		costo = 2.76 + 5 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)+  dic[cuarto_ingrediente]*float(gramo4)+  dic[quinto_ingrediente]*float(gramo5) +  dic[sexto_ingrediente]*float(gramo6)
+		dic={'jamon':0.16,'quesocrema':0.12, 'quesomozarella':0.14,
+		     'kitkat':0.29,'nutella':0.17,'mermelada':0.12,
+			 'lechera':0.06,'chocoretas':0.2,'durazno':0.06,
+			 'oreo':0.22,'salsatomate':0.06,'quesogouda':0.21,'peperoni':0.345,
+			 'chantilly':0.055,'nuez':0.5,'manzana':0.04,'nuez':0.5,
+			 'canela':0.28,'cajeta':0.14,'platano':0.023,'fresa':0.13,
+			 'arandano':0,'na':0,'kises menta':0.375,'quesomanchego':0.085,
+			 'mermelada fresa':0.12, 'cerezas':0.11,'mermelada zarzamora':0.07,
+			 'piña':0.067}
+		costo = 5.88 + 4.25 + 0.079 + 0.5 + 0.904 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)+  dic[cuarto_ingrediente]*float(gramo4)+  dic[quinto_ingrediente]*float(gramo5) +  dic[sexto_ingrediente]*float(gramo6)
 		costo = str(round(costo,2))
 		self.CostoPantalla.set(costo)
 
