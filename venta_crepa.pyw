@@ -2,8 +2,6 @@ from distutils.command.config import config
 from msilib.schema import File
 from tkinter import  END, Tk, Button, Entry, Label, ttk, PhotoImage
 from tkinter import  StringVar,Scrollbar,Frame, IntVar
-
-from numpy import product
 from conexion import*
 import time
 class Ventana(Frame):
@@ -185,12 +183,13 @@ class Ventana(Frame):
 		self.titulo = Label(self.frame_top,text= 'La vuelta al mundo en 80 crepas', bg='#FEF5E7', fg= '#A569BD', font= ('Imprint MT Shadow', 15, 'bold'))
 		self.titulo.pack(expand=1)
 		######################## VENTANA PRINCIPAL #################
-		Label(self.frame_uno, text= 'App para llevar el registro de crepas vendidas', bg='#FEF5E7', fg= '#A569BD', font= ('Freehand521 BT', 20, 'bold')).pack(expand=1)
+		Label(self.frame_uno, text= 'Bienvenid@ a la vuelta al mundo en 80 crepas', bg='#FEF5E7', fg= '#A569BD', font= ('Freehand521 BT', 20, 'bold')).pack(expand=1)
 		Label(self.frame_uno ,image= self.logo, bg='#FEF5E7').pack(expand=1)
 
 		######################## MOSTRAR TODOS LOS PRODUCTOS DE LA BASE DE DATOS MYSQL #################
 		Label(self.frame_dos, text= 'Datos de MySQL', bg='#FEF5E7', fg= '#A569BD', font= ('Comic Sans MS', 12, 'bold')).grid(column =0, row=0)
-		Button(self.frame_dos, text='ACTUALIZAR',fg='black' ,font = ('Arial', 11,'bold'), command= self.datos_totales, bg = '#A569BD', bd = 2, borderwidth=2).grid(column=1, row=0, pady=5)
+		Button(self.frame_dos, text='VER DATOS',fg='black' ,font = ('Arial', 11,'bold'), command= self.datos_totales, bg = '#A569BD', bd = 2, borderwidth=2).grid(column=1, row=0, pady=5)
+		Button(self.frame_dos, text='HOY',fg='black' ,font = ('Arial', 11,'bold'), command= self.datos_hoy, bg = '#A569BD', bd = 2, borderwidth=2).grid(column=2, row=0, pady=5)
 		#ESTILO DE LAS TABLAS DE DATOS TREEVIEW
 		estilo_tabla = ttk.Style()
 		estilo_tabla.configure("Treeview", font= ('Helvetica', 10, 'bold'), foreground='black',  background='#FEF5E7')  #, fieldbackground='yellow'
@@ -388,6 +387,14 @@ class Ventana(Frame):
 
 	def datos_totales(self):
 		datos = self.base_datos.mostrar_productos()
+		self.tabla_uno.delete(*self.tabla_uno.get_children())
+		i = -1
+		for dato in datos:
+			i= i+1
+			self.tabla_uno.insert('',i, text = datos[i][1:2], values=datos[i][2:7])
+	
+	def datos_hoy(self):
+		datos = self.base_datos.mostrar_productos_hoy()
 		self.tabla_uno.delete(*self.tabla_uno.get_children())
 		i = -1
 		for dato in datos:

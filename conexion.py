@@ -1,5 +1,5 @@
 import mysql.connector  #pip install mysql-connector-python
- 
+
 class Registro_datos():
 
     def __init__(self):
@@ -25,7 +25,14 @@ class Registro_datos():
         cursor.execute(sql)
         registro = cursor.fetchall()
         return registro
-    
+
+    def mostrar_productos_hoy(self):
+        cursor = self.conexion.cursor()
+        sql = "SELECT * FROM crepas.ventas WHERE Fecha =  curdate();" 
+        cursor.execute(sql)
+        registro = cursor.fetchall()
+        return registro
+
     def mostrar_precios(self):
         cursor = self.conexion.cursor()
         sql = "SELECT * FROM crepas.crepas " 
