@@ -540,7 +540,7 @@ class Ventana(Frame):
 			 'arandano':0,'na':0,'kises menta':0.375,'quesomanchego':0.085,
 			 'mermelada fresa':0.12, 'cerezas':0.11,'mermelada zarzamora':0.07,
 			 'piña':0.067}
-		costo = 5.88 + 4.25 + 0.079 + 0.5 + 0.904 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)+  dic[cuarto_ingrediente]*float(gramo4)+  dic[quinto_ingrediente]*float(gramo5) +  dic[sexto_ingrediente]*float(gramo6)
+		costo = 10.15 + dic[primer_ingrediente]*float(gramo1) + dic[segundo_ingrediente]*float(gramo2) +  dic[tercer_ingrediente]*float(gramo3)+  dic[cuarto_ingrediente]*float(gramo4)+  dic[quinto_ingrediente]*float(gramo5) +  dic[sexto_ingrediente]*float(gramo6)
 		costo = str(round(costo,2))
 		self.CostoPantalla.set(costo)
 
